@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="name">Add new animal</label>
+    <input type="text" id="addInput"> <button id="addBtn">Add</button>
+    <br>
+    <br>
+    <label for="name">Delete animal</label>
+    <input type="text" id="delInput"> <button id="delBtn">Delete</button>
+    <br>
+    <br>
+    <label for="name">Check animal</label>
+    <input type="text" id="checkInput"> <button id="checkBtn">Check</button>
+    <br><br>
+    <button id="print">Print List animals</button>
+    <br><br>
+    <p id="result"></p>
+    <script>
+
+        let animals = new Set()
+
+        // Add new animals
+        document.getElementById('addBtn').addEventListener('click', () => {
+            let addInput = document.getElementById('addInput')
+            if (animals.has(addInput.value)) {
+                alert('This animal is already exist on the list')
+            }
+            animals.add(addInput.value);
+            addInput.focus()
+            addInput.value = ''
+            console.log(animals)
+        })
+
+        //Delete animals
+        document.getElementById('delBtn').addEventListener('click', () => {
+            let delInput = document.getElementById('delInput')
+            animals.delete(delInput.value)
+            delInput.focus()
+            delInput.value = ''
+            console.log(animals)
+        })
+
+        //Check animals
+        document.getElementById('checkBtn').addEventListener('click', () => {
+            let checkInput = document.getElementById('checkInput')
+            if (animals.has(checkInput.value)) {
+                document.getElementById('result').innerText = 'This animal is ON the list'
+            }
+            else {
+                document.getElementById('result').innerText = 'This animal is NOT ON the list'
+            }
+            checkInput.focus()
+            checkInput.value = ''
+        })
+
+        //Print the list
+        document.getElementById('print').addEventListener('click', () => {
+            if (animals.size > 0) {
+                document.getElementById('result').innerText = `${[...animals].join(", ")}`
+            }
+            else {
+                document.getElementById('result').innerText = 'There are no animals in the list'
+            }
+        })
+
+    </script>
+</body>
+
+</html>
